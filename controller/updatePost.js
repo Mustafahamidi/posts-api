@@ -1,27 +1,30 @@
-import posts from "../db/data.js"
-const updatePost = (req,res,next) => {
-    const {id} = req.params
-    const {title, content, author,date,category,likes,comments} = req.body
+import posts from "../db/data.js";
+const updatePost = (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { title, content, author, date, category, likes, comments } =
+      req.body;
 
-    const nmberId = Number(id)
+    const nmberId = Number(id);
 
-    const post = posts.find(post => post.id === nmberId)
+    const post = posts.find((post) => post.id === nmberId);
 
-    if(!post){
-       return  res.status(404).json({message:'Not Found'})
+    if (!post) {
+      return res.status(404).json({ message: "Not Found" });
     }
 
-   if(title) post.title = title
-   if(content) post.content = content
-   if(author) post.author = author
-   if(date) post.date = date
-   if(category) post.category = category
-   if(typeof likes !== 'undefined') post.likes = likes
-   if(comments) post.comments = comments
+    if (title) post.title = title;
+    if (content) post.content = content;
+    if (author) post.author = author;
+    if (date) post.date = date;
+    if (category) post.category = category;
+    if (typeof likes !== "undefined") post.likes = likes;
+    if (comments) post.comments = comments;
 
-    res.json(post)
+    res.json(post);
+  } catch (error) {
+    next(error);
+  }
+};
 
-    
-}
-
-export default updatePost
+export default updatePost;

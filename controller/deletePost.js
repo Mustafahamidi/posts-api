@@ -1,16 +1,20 @@
-import posts from "../db/data.js"
-const deletePost = (req,res,next) => {
-    const{id} = req.params
-    const numberId = Number(id)
-    
-    const postIndex = posts.findIndex(post => post.id === numberId)
+import posts from "../db/data.js";
+const deletePost = (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const numberId = Number(id);
 
-    if(postIndex === -1){
-       return  res.status(404).json({message:'Not Found'})
+    const postIndex = posts.findIndex((post) => post.id === numberId);
+
+    if (postIndex === -1) {
+      return res.status(404).json({ message: "Not Found" });
     }
 
-    const deletePost = posts.splice(postIndex,1)
-    res.json(deletePost[0])
-}
+    const deletePost = posts.splice(postIndex, 1);
+    res.json(deletePost[0]);
+  } catch (error) {
+    next(error);
+  }
+};
 
-export default deletePost
+export default deletePost;
