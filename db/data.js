@@ -390,7 +390,7 @@ const posts = [
     "id": 44,
     "title": "Debugging Tips for Front-End Developers",
     "content": "Debugging Tips for Front-End Developers - This article covers essential concepts and practical tips for developers.",
-    "author": "Liam Johnson",
+    "author": "Mustafa",
     "date": "2025-02-14",
     "category": "Frontend",
     "likes": 119

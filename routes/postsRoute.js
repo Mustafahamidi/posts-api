@@ -2,8 +2,14 @@ import express from 'express'
 import posts from '../db/data.js'
 const router = express.Router()
 
-//Get all posts
+//Get all posts and Query search
 router.get('/',(req,res) => {
+    const { author } = req.query
+
+    if(author){
+        const searchAuthor = posts.filter(post => post.author === author)
+        return res.status(200).json(searchAuthor)
+    }
     res.status(200).json(posts)
 })
 
@@ -65,7 +71,7 @@ router.put('/:id',(req,res) => {
 router.delete('/:id',(req,res) => {
     const{id} = req.params
     const numberId = Number(id)
-
+    
     const postIndex = posts.findIndex(post => post.id === numberId)
 
     if(postIndex === -1){
